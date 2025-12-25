@@ -2,18 +2,18 @@ import ratelimit from "../config/upstash.js";
 
 const rateLimiter = async (req, res, next) => {
   try {
-    if (!ratelimit) return next(); // Redis not configured → skip
-
-    const { success } = await ratelimit.limit("rate-limit");
+    const { success } = await ratelimit.limit("my-rate-limit");
 
     if (!success) {
-      return res.status(429).json({ message: "Too many requests" });
+      return res.status(429).json({
+        message: "Too many requests, please try again later.",
+      });
     }
 
     next();
   } catch (error) {
-    console.log("Rate limit error:", error);
-    next(); // Do NOT block requests if rate limit fails
+    console.log("Rate limit error", error);
+    next(error);
   }
 };
 

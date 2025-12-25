@@ -2,27 +2,15 @@ import express from "express";
 import {
   createTransaction,
   deleteTransaction,
-  getTransactionsByUserId,
   getSummaryByUserId,
+  getTransactionsByUserId,
 } from "../controllers/transactionsController.js";
 
 const router = express.Router();
 
-// Default GET route (fix)
-router.get("/", (req, res) => {
-  res.json({ message: "Transactions API is working!" });
-});
-
-// Summary route
-router.get("/summary/:userId", getSummaryByUserId);
-
-// Create transaction
-router.post("/", createTransaction);
-
-// Delete transaction
-router.delete("/:id", deleteTransaction);
-
-// Get transactions by userId
 router.get("/:userId", getTransactionsByUserId);
+router.post("/", createTransaction);
+router.delete("/:id", deleteTransaction);
+router.get("/summary/:userId", getSummaryByUserId);
 
 export default router;

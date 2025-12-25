@@ -71,7 +71,7 @@ const CreateScreen = () => {
         throw new Error(errorData.error || "Failed to create transaction");
       }
 
-      Alert.alert("Success", "Transaction created successfully...");
+      Alert.alert("Success", "Transaction created successfully");
       router.back();
     } catch (error) {
       Alert.alert("Error", error.message || "Failed to create transaction");

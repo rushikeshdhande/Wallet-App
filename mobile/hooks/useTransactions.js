@@ -1,9 +1,11 @@
+// react custom hook file
+
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
+import { API_URL } from "../constants/api";
 
-const API_URL =  "https://wallet-api-rushi.onrender.com/api"; 
- 
 // const API_URL = "https://wallet-api-cxqp.onrender.com/api";
+// const API_URL = "http://localhost:5001/api";
 
 export const useTransactions = (userId) => {
   const [transactions, setTransactions] = useState([]);
@@ -14,6 +16,7 @@ export const useTransactions = (userId) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
+  // useCallback is used for performance reasons, it will memoize the function
   const fetchTransactions = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/transactions/${userId}`);
@@ -36,9 +39,10 @@ export const useTransactions = (userId) => {
 
   const loadData = useCallback(async () => {
     if (!userId) return;
-    setIsLoading(true);
 
+    setIsLoading(true);
     try {
+      // can be run in parallel
       await Promise.all([fetchTransactions(), fetchSummary()]);
     } catch (error) {
       console.error("Error loading data:", error);
@@ -49,12 +53,10 @@ export const useTransactions = (userId) => {
 
   const deleteTransaction = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/transactions/${id}`, {
-        method: "DELETE",
-      });
-
+      const response = await fetch(`${API_URL}/transactions/${id}`, { method: "DELETE" });
       if (!response.ok) throw new Error("Failed to delete transaction");
 
+      // Refresh data after deletion
       loadData();
       Alert.alert("Success", "Transaction deleted successfully");
     } catch (error) {

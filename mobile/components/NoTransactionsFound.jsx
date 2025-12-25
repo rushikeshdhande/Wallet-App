@@ -17,7 +17,7 @@ const NoTransactionsFound = () => {
       />
       <Text style={styles.emptyStateTitle}>No transactions yet</Text>
       <Text style={styles.emptyStateText}>
-        Rushikesh encourages you to take the first step—add your first transaction today.
+        Start tracking your finances by adding your first transaction
       </Text>
       <TouchableOpacity style={styles.emptyStateButton} onPress={() => router.push("/create")}>
         <Ionicons name="add-circle" size={18} color={COLORS.white} />
