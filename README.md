@@ -4,11 +4,6 @@
 
 This isn't just a front-end app — it's a **complete mobile application** with backend integration, authentication, and cloud-based storage.
 
-✅ Works on **iOS & Android (simulator or real device)**  
-✅ Uses your existing **React knowledge**  
-✅ No need for Swift, Kotlin, or native modules  
-✅ Full-stack project in **under 4 hours**
-
 ---
 
 ## 🧑‍🍳 App Features Overview
